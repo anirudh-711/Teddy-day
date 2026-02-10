@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teddy Day 🧸</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f6efe7;
+  overflow: hidden;
+}
+
+/* Pages */
+.page {
+  display: none;
+  height: 100vh;
+  width: 100vw;
+  text-align: center;
+  padding: 60px 20px;
+  box-sizing: border-box;
+}
+
+.page.active {
+  display: block;
+}
+
+/* Teddy emoji */
+.teddy {
+  font-size: 6rem;
+  margin-top: 40px;
+}
+
+/* Text */
+p {
+  font-size: 1.25rem;
+  color: #5a4a42;
+  margin-top: 25px;
+  line-height: 1.5;
+}
+
+/* Floating hearts & teddies */
+.floating {
+  position: fixed;
+  bottom: -40px;
+  font-size: 1.5rem;
+  animation: floatUp 6s linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  20% { opacity: 1; }
+  100% {
+    transform: translateY(-120vh);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="page active">
+  <div class="teddy">🧸</div>
+  <p>Hey you…<br>This is for Teddy Day 🤍</p>
+</div>
+
+<div class="page">
+  <div class="teddy">🧸💭</div>
+  <p>This teddy is for every quiet moment,<br>every tired day.</p>
+</div>
+
+<div class="page">
+  <div class="teddy">🧸✨</div>
+  <p>Because you’re special in ways<br>you don’t even realise.</p>
+</div>
+
+<div class="page">
+  <div class="teddy">🧸🤍</div>
+  <p>If hugs could travel through screens,<br>this one’s yours.</p>
+</div>
+
+<div class="page">
+  <div class="teddy">🧸❤️</div>
+  <p>
+    Happy Teddy Day, <br>
+    <strong>Tejasvi</strong> 🤍<br><br>
+    From me, always.
+  </p>
+</div>
+
+<script>
+/* Swipe navigation */
+let current = 0;
+const pages = document.querySelectorAll('.page');
+let startX = 0;
+
+document.addEventListener('touchstart', e => {
+  startX = e.touches[0].clientX;
+});
+
+document.addEventListener('touchend', e => {
+  let endX = e.changedTouches[0].clientX;
+  if (startX - endX > 50) nextPage();
+});
+
+function nextPage() {
+  if (current < pages.length - 1) {
+    pages[current].classList.remove('active');
+    current++;
+    pages[current].classList.add('active');
+  }
+}
+
+/* Floating hearts & teddies */
+setInterval(() => {
+  const el = document.createElement('div');
+  el.className = 'floating';
+  el.style.left = Math.random() * 100 + 'vw';
+  el.innerHTML = Math.random() > 0.5 ? '❤️' : '🧸';
+  el.style.animationDuration = 4 + Math.random() * 3 + 's';
+  document.body.appendChild(el);
+
+  setTimeout(() => el.remove(), 7000);
+}, 600);
+</script>
+
+</body>
+</html>
